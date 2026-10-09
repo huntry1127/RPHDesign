@@ -41,12 +41,27 @@ splash.querySelectorAll('a').forEach(link=>link.addEventListener('click',event=>
 document.querySelectorAll('.package').forEach(button=>button.addEventListener('click',()=>{
  const selection=document.getElementById('package');
  if(!selection){window.location.assign('/?package='+encodeURIComponent(button.dataset.package)+'#contact');return}
- selection.value=button.dataset.package;document.getElementById('contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});document.getElementById('form-status').textContent=button.dataset.package+' selected. Add your details to prepare a project brief.';
+ selection.value=button.dataset.package;document.getElementById('contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});document.getElementById('form-status').textContent=button.dataset.package+' selected. Add your details to prepare an email.';
 }));
 const requestedPackage=new URLSearchParams(window.location.search).get('package');
 const packageSelect=document.getElementById('package');
-if(requestedPackage&&packageSelect&&Array.from(packageSelect.options).some(option=>option.value===requestedPackage)){packageSelect.value=requestedPackage;document.getElementById('form-status').textContent=requestedPackage+' selected. Add your details to prepare a project brief.'}
-document.getElementById('brief-form')?.addEventListener('submit',event=>{event.preventDefault();const data=new FormData(event.target);const content=['RP HUNT DESIGN — PROJECT BRIEF','',...Array.from(data.entries()).map(([key,value])=>key.toUpperCase()+': '+String(value).trim()),'','Prepared locally. This brief has not been sent to RP Hunt Design.'].join('\n');const url=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='RP-Hunt-Design-Project-Brief.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);document.getElementById('form-status').textContent='Your project brief has been downloaded. Nothing has been sent. Keep it ready for when the studio contact email is available.'});
+if(requestedPackage&&packageSelect&&Array.from(packageSelect.options).some(option=>option.value===requestedPackage)){packageSelect.value=requestedPackage;document.getElementById('form-status').textContent=requestedPackage+' selected. Add your details to prepare an email.'}
+document.getElementById('brief-form')?.addEventListener('submit',event=>{
+ event.preventDefault();
+ const data=new FormData(event.target);
+ const value=key=>String(data.get(key)||'').trim();
+ const subject='Website inquiry'+(value('business')?' — '+value('business'):'');
+ const body=[
+  'Hi Ryan,','',
+  'Name: '+value('name'),
+  'Email: '+value('email'),
+  'Business: '+value('business'),
+  'Interested in: '+value('package'),'',
+  'Project details:',value('details')
+ ].join('\n');
+ window.location.href='mailto:huntry1127@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+ document.getElementById('form-status').textContent='Your email app should open with your project details. Review and send the message to huntry1127@gmail.com. If it does not open, use the email address above to contact me.';
+});
 
 // Mark the current destination without adding navigation to the page header.
 splash.querySelectorAll('a').forEach(link=>{const url=new URL(link.href,window.location.href);if(url.pathname===window.location.pathname&&!url.hash)link.setAttribute('aria-current','page')});
