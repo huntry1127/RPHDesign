@@ -129,3 +129,42 @@ header.wrap{max-width:none;padding-left:5%;padding-right:5%}
 @media(prefers-reduced-motion:reduce){
 .projects-page .project-arrow,.projects-page .brand-preview,.projects-page .device-frame,.projects-page .browser{transition:none}
 }
+
+/* Projects: a quieter showcase, inspired by the reference gallery. */
+.projects-page main>.wrap{max-width:1240px}
+.projects-page .projects-intro{max-width:620px;margin:0 auto;text-align:center;padding:64px 0 58px}
+.projects-page .projects-intro h1{font:500 clamp(30px,3.2vw,42px)/1.2 Arial,Helvetica,sans-serif;letter-spacing:-1.4px;margin:0 0 14px}
+.projects-page .projects-intro p{font:400 16px/1.65 Arial,Helvetica,sans-serif;letter-spacing:0;color:var(--muted)}
+.projects-page .work-grid{gap:48px 32px}
+.projects-page .project-image{height:clamp(280px,25vw,330px);padding:24px 30px;border:0}
+.projects-page .project-image.carli-mobile{background:#c6cdbf}
+.projects-page .project-image.rebel{background:#bac3b5}
+.projects-page .project-image.old-school-project{background:#ded8c7}
+.projects-page .project-image.cabrera-project{background:#ccd4d0}
+.projects-page .device-frame{border-width:4px;box-shadow:0 8px 18px #18312825}
+.projects-page .rebel .browser,.projects-page .brand-preview{border-width:3px;border-bottom-width:5px;border-radius:4px;box-shadow:0 7px 18px #18312820}
+.projects-page .brand-preview{padding:22px}
+.projects-page .project-meta{padding:16px 0 0;align-items:flex-start}
+.projects-page .project-meta h2{font:500 18px/1.4 Arial,Helvetica,sans-serif;letter-spacing:-.25px;margin:0 0 5px}
+.projects-page .project-meta p{font:400 11px/1.6 Arial,Helvetica,sans-serif;letter-spacing:0;text-transform:none}
+.projects-page .project-arrow{font-size:19px;line-height:1.4;color:var(--muted)}
+.projects-page .project-tile:hover .project-meta h2{color:#fff}
+.projects-page .projects-cta{margin-top:58px;padding:26px 0 34px}
+.projects-page .projects-cta h2{font:400 20px/1.4 Arial,Helvetica,sans-serif;letter-spacing:-.3px}
+.projects-page .project-inquiry{font-size:12px;border-bottom:0;gap:14px}
+.projects-page .project-inquiry span{font-size:18px}
+@media(max-width:900px) and (min-width:681px){
+.projects-page .project-image{height:270px;padding:22px}
+.projects-page .brand-preview{padding:16px}
+}
+@media(max-width:680px){
+.projects-page .projects-intro{padding:44px 0 38px;max-width:320px}
+.projects-page .projects-intro h1{font-size:32px;letter-spacing:-1px}
+.projects-page .projects-intro p{font-size:14px}
+.projects-page .work-grid{row-gap:34px}
+.projects-page .project-image{height:280px;padding:22px}
+.projects-page .project-meta h2{font-size:18px}
+.projects-page .project-meta p{font-size:11px}
+.projects-page .projects-cta{margin-top:40px;padding:24px 0 28px}
+.projects-page .projects-cta h2{font-size:19px}
+}
