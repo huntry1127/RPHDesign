@@ -62,3 +62,70 @@ header.wrap{max-width:none;padding-left:5%;padding-right:5%}
 .pricing-page .pricing-page-section{background:var(--paper)}.pricing-page .section-head{align-items:flex-end;gap:40px}.pricing-page .section-head h2{font:400 clamp(42px,5vw,64px)/1.12 Georgia,serif;letter-spacing:-2px;max-width:600px}.pricing-page .section-head>p{max-width:370px;font-size:14px;line-height:1.8}.pricing-page .price{padding:32px 27px;display:flex;flex-direction:column;border-radius:0}.pricing-page .price h3{font:400 27px/1.2 Georgia,serif}.pricing-page .amount{font-size:40px;letter-spacing:-1.5px}.pricing-page .amount small{letter-spacing:1px}.pricing-page .price>p{font-size:13px;line-height:1.7;min-height:66px}.pricing-page .price ul{margin-bottom:30px}.pricing-page .price li{font-size:12px;line-height:1.7;margin-bottom:10px}.pricing-page .price .btn{margin-top:auto;font-size:11px;padding:14px 18px;gap:10px}.package-inclusions{padding:36px 0 22px;border-bottom:1px solid var(--line)}.package-inclusions h3{font:400 25px/1.2 Georgia,serif;margin:0 0 20px}.package-inclusions>div{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.package-inclusions span{font-size:11px;line-height:1.7;color:var(--muted)}.pricing-page .pricing-note{font-size:11px;line-height:1.8;max-width:950px;margin:22px 0 30px}
 @media(max-width:900px){.package-inclusions>div{grid-template-columns:repeat(2,1fr)}.pricing-page .price{padding:28px 22px}.pricing-page .amount{font-size:34px}}
 @media(max-width:680px){.pricing-page .section-head{gap:20px}.pricing-page .section-head h2{font-size:42px}.pricing-page .price>p{min-height:0}.package-inclusions{padding:28px 0 20px}.package-inclusions>div{gap:16px}}
+
+/* Projects: emerald gallery with silver type and generously framed previews. */
+.projects-page{--paper:#102e25;--ink:#e0e4df;--muted:#b0bdb4;--line:#365347;--green:#d9e1da;background:var(--paper);color:var(--ink)}
+.projects-page header.wrap,.projects-page main>.wrap,.projects-page footer.wrap{max-width:1440px;padding-left:5%;padding-right:5%}
+.projects-page .nav{height:96px;border-color:var(--line)}
+.projects-page .brand-icon{mix-blend-mode:screen;filter:grayscale(1) invert(1);opacity:.88}
+.projects-page .brand-wordmark>span{color:var(--muted)}
+.projects-page .projects-intro{padding:44px 0 38px}
+.projects-page .projects-intro h1{font-size:clamp(52px,5.5vw,76px);line-height:1.08;margin:15px 0 14px;color:var(--ink);letter-spacing:-2px}
+.projects-page .projects-intro p{font:17px/1.6 Georgia,serif;color:var(--muted)}
+.projects-page .work-grid{gap:36px 32px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.projects-page .work-card{min-width:0}
+.projects-page .project-tile{color:inherit}
+.projects-page .project-tile:focus-visible{outline:2px solid #d9e1da;outline-offset:8px}
+.projects-page .project-image{height:auto;aspect-ratio:1.75;padding:36px 32px 22px;border:1px solid #ffffff12;background:#d4d6ca}
+.projects-page .preview-type{top:15px;left:18px;font-size:7px;letter-spacing:1.6px;color:#4c574f}
+.projects-page .project-image.carli-mobile{background:linear-gradient(125deg,#d7d9cd,#aeb9ab)}
+.projects-page .device-frame{width:clamp(110px,12vw,166px);max-width:48%;border:5px solid #252a24;border-radius:20px;box-shadow:12px 17px 28px #1c332c40}
+.projects-page .device-frame img{border-radius:14px}
+.projects-page .project-image.rebel{background:linear-gradient(135deg,#a9b3a3,#c9cbbd)}
+.projects-page .rebel .browser{height:auto;width:100%;border:7px solid #262c26;border-bottom-width:11px;border-radius:9px;box-shadow:10px 15px 26px #18312845}
+.projects-page .rebel .chrome{height:18px}
+.projects-page .rebel-nav{height:25px;padding:7px;font-size:7px}
+.projects-page .rebel-body{height:auto;aspect-ratio:1.95}
+.projects-page .rebel-copy{top:20%;left:7%}
+.projects-page .rebel-copy h3{font-size:clamp(24px,3vw,43px);margin:10px 0}
+.projects-page .rebel-copy small{font-size:6px;letter-spacing:1px}
+.projects-page .tiny-button{font-size:6px;padding:7px 10px}
+.projects-page .old-school-project{background:linear-gradient(135deg,#c9c8b6,#e5decc)}
+.projects-page .cabrera-project{background:linear-gradient(135deg,#b8c4c3,#dbe0dc)}
+.projects-page .brand-preview{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#f3efe4;border:7px solid #29312b;border-bottom-width:11px;border-radius:8px;box-shadow:10px 15px 26px #18312830;transition:transform .35s}
+.projects-page .cabrera-project .brand-preview{background:#f1f3f0}
+.projects-page .brand-preview img{display:block;width:100%;height:100%;max-height:220px;object-fit:contain}
+.projects-page .project-tile:hover .brand-preview{transform:translateY(-4px)}
+.projects-page .project-meta{padding:18px 0 0;gap:20px}
+.projects-page .project-meta h2{font:400 clamp(23px,2.2vw,30px)/1.2 Georgia,serif;margin:0 0 9px;letter-spacing:-.5px;color:var(--ink)}
+.projects-page .project-meta p{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.projects-page .project-arrow{font-size:24px;color:#c8d5ca}
+.projects-page .projects-cta{margin-top:48px;padding:30px 0 40px;border-color:var(--line)}
+.projects-page .projects-cta h2{font-size:29px}
+.projects-page .project-inquiry{color:var(--ink);border-color:#7a9283}
+.projects-page .footer{border-color:var(--line);padding:28px 0}
+.projects-page .footer nav a,.projects-page .copyright{color:var(--muted)}
+@media(max-width:900px) and (min-width:681px){
+.projects-page .project-image{aspect-ratio:1.5;padding:34px 18px 18px}
+.projects-page .brand-preview{padding:15px}
+.projects-page .rebel-copy h3{font-size:25px}
+}
+@media(max-width:680px){
+.projects-page .nav{height:82px}
+.projects-page .projects-intro{padding:36px 0 30px}
+.projects-page .projects-intro h1{font-size:54px}
+.projects-page .projects-intro p{font-size:16px}
+.projects-page .work-grid{grid-template-columns:1fr;row-gap:30px}
+.projects-page .project-image{aspect-ratio:1.35;padding:38px 24px 22px}
+.projects-page .device-frame{width:128px;max-width:50%}
+.projects-page .rebel-body{aspect-ratio:1.7}
+.projects-page .rebel-copy h3{font-size:32px}
+.projects-page .brand-preview{padding:22px}
+.projects-page .project-meta h2{font-size:25px}
+.projects-page .project-meta p{font-size:8px;letter-spacing:1px}
+.projects-page .projects-cta{margin-top:36px;padding:28px 0}
+.projects-page .projects-cta h2{font-size:26px}
+}
+@media(prefers-reduced-motion:reduce){
+.projects-page .project-arrow,.projects-page .brand-preview,.projects-page .device-frame,.projects-page .browser{transition:none}
+}
