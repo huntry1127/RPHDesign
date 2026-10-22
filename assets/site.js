@@ -41,26 +41,55 @@ splash.querySelectorAll('a').forEach(link=>link.addEventListener('click',event=>
 document.querySelectorAll('.package').forEach(button=>button.addEventListener('click',()=>{
  const selection=document.getElementById('package');
  if(!selection){window.location.assign('/?package='+encodeURIComponent(button.dataset.package)+'#contact');return}
- selection.value=button.dataset.package;document.getElementById('contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});document.getElementById('form-status').textContent=button.dataset.package+' selected. Add your details to prepare an email.';
+ selection.value=button.dataset.package;document.getElementById('contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});document.getElementById('form-status').textContent=button.dataset.package+' selected. Add your details and send your inquiry.';
 }));
 const requestedPackage=new URLSearchParams(window.location.search).get('package');
 const packageSelect=document.getElementById('package');
-if(requestedPackage&&packageSelect&&Array.from(packageSelect.options).some(option=>option.value===requestedPackage)){packageSelect.value=requestedPackage;document.getElementById('form-status').textContent=requestedPackage+' selected. Add your details to prepare an email.'}
-document.getElementById('brief-form')?.addEventListener('submit',event=>{
+if(requestedPackage&&packageSelect&&Array.from(packageSelect.options).some(option=>option.value===requestedPackage)){packageSelect.value=requestedPackage;document.getElementById('form-status').textContent=requestedPackage+' selected. Add your details and send your inquiry.'}
+document.getElementById('brief-form')?.addEventListener('submit',async event=>{
  event.preventDefault();
- const data=new FormData(event.target);
- const value=key=>String(data.get(key)||'').trim();
- const subject='Website inquiry'+(value('business')?' — '+value('business'):'');
- const body=[
-  'Hi Ryan,','',
-  'Name: '+value('name'),
-  'Email: '+value('email'),
-  'Business: '+value('business'),
-  'Interested in: '+value('package'),'',
-  'Project details:',value('details')
- ].join('\n');
- window.location.href='mailto:huntry1127@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
- document.getElementById('form-status').textContent='Your email app should open with your project details. Review and send the message to huntry1127@gmail.com. If it does not open, use the email address above to contact me.';
+ const form=event.currentTarget;
+ if(form.dataset.submitting==='true')return;
+ if(!form.checkValidity()){form.reportValidity();return}
+ const status=document.getElementById('form-status');
+ const data=new FormData(form);
+ if(String(data.get('_honey')||'').trim())return;
+ const payload=Object.fromEntries(Array.from(data.entries(),([key,value])=>[key,String(value).trim()]));
+ const button=form.querySelector('button[type="submit"]');
+ form.dataset.submitting='true';
+ form.setAttribute('aria-busy','true');
+ button.disabled=true;
+ status.textContent='Sending your message…';
+ const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),20000);
+ try{
+  const response=await fetch('https://formsubmit.co/ajax/huntry1127@gmail.com',{
+   method:'POST',
+   headers:{'Content-Type':'application/json','Accept':'application/json'},
+   body:JSON.stringify(payload),
+   signal:controller.signal
+  });
+  const result=await response.json();
+  if(!response.ok||(result.success!==true&&result.success!=='true')){
+   if(/activat|verif/i.test(String(result.message||''))){
+    status.textContent='The contact inbox is awaiting verification. Your details are still here; please try again once it is ready, or contact huntry1127@gmail.com directly.';
+   }else{
+    status.textContent='Your message could not be sent. Your details are still here—please try again, or contact huntry1127@gmail.com directly.';
+   }
+   return;
+  }
+  form.reset();
+  status.textContent='Thanks! Your message has been submitted. I’ll be in touch soon.';
+ }catch(error){
+  status.textContent=error.name==='AbortError'
+   ?'The request timed out, so we could not confirm your submission. Your details are still here. Please wait a moment before trying again.'
+   :'We could not confirm your submission. Check your connection and try again. Your details are still here, or you can contact huntry1127@gmail.com directly.';
+ }finally{
+  clearTimeout(timeout);
+  form.dataset.submitting='false';
+  form.removeAttribute('aria-busy');
+  button.disabled=false;
+ }
 });
 
 // Mark the current destination without adding navigation to the page header.
