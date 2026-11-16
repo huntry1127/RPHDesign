@@ -38,14 +38,20 @@ menu.addEventListener('click',openMenu);
 closeButton.addEventListener('click',()=>closeMenu());
 splash.addEventListener('cancel',event=>{event.preventDefault();closeMenu()});
 splash.querySelectorAll('a').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();closeMenu(link.getAttribute('href'))}));
-document.querySelectorAll('.package').forEach(button=>button.addEventListener('click',()=>{
- const selection=document.getElementById('package');
- if(!selection){window.location.assign('/?package='+encodeURIComponent(button.dataset.package)+'#contact');return}
- selection.value=button.dataset.package;document.getElementById('contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});document.getElementById('form-status').textContent=button.dataset.package+' selected. Add your details and send your inquiry.';
-}));
-const requestedPackage=new URLSearchParams(window.location.search).get('package');
-const packageSelect=document.getElementById('package');
-if(requestedPackage&&packageSelect&&Array.from(packageSelect.options).some(option=>option.value===requestedPackage)){packageSelect.value=requestedPackage;document.getElementById('form-status').textContent=requestedPackage+' selected. Add your details and send your inquiry.'}
+const requestedPackage = new URLSearchParams(window.location.search).get('package');
+const packageSelect = document.getElementById('package');
+
+if (requestedPackage && packageSelect) {
+ const selectedOption = Array.from(packageSelect.options).find(option =>
+  option.dataset.package === requestedPackage || option.value === requestedPackage
+ );
+ if (selectedOption) {
+  packageSelect.value = selectedOption.value;
+  document.getElementById('form-status').textContent =
+   selectedOption.text + ' selected. Add your details and send your inquiry.';
+ }
+}
+
 document.getElementById('brief-form')?.addEventListener('submit',async event=>{
  event.preventDefault();
  const form=event.currentTarget;
